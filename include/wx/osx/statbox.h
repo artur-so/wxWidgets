@@ -43,6 +43,7 @@ public:
 
     // protect native font of box
     virtual bool SetFont( const wxFont &font ) wxOVERRIDE;
+    virtual bool SetForegroundColour(const wxColour& colour) wxOVERRIDE;
 };
 
 #endif
