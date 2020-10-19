@@ -3597,8 +3597,11 @@ void wxWidgetCocoaImpl::SetFont(wxFont const& font, wxColour const&col, long, bo
     else if ( [m_osxView isKindOfClass:[NSBox class] ] )
         targetView = [(NSBox*) m_osxView titleCell];
 
-    if ([targetView respondsToSelector:@selector(setFont:)])
-        [targetView setFont: font.OSXGetNSFont()];
+    if (font.IsOk())
+    {
+        if ([targetView respondsToSelector:@selector(setFont:)])
+            [targetView setFont: font.OSXGetNSFont()];
+    }
     if ([targetView respondsToSelector:@selector(setTextColor:)])
         [targetView setTextColor: col.OSXGetNSColor()];
     if ([m_osxView respondsToSelector:@selector(setAttributedTitle:)])

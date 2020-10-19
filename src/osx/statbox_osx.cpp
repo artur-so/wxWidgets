@@ -64,5 +64,20 @@ bool wxStaticBox::SetFont(const wxFont& font)
     return retval;
 }
 
+bool wxStaticBox::SetForegroundColour(const wxColour& colour)
+{
+    bool retval = wxWindowBase::SetForegroundColour( colour );
+
+    // dont' update the native control, it has its own small font
+    if ( GetPeer() )
+        GetPeer()->SetFont( wxFont(), colour, GetWindowStyle() ) ;
+
+    // do not trigger refreshes upon invisible and possible partly created objects
+    if ( IsShownOnScreen() )
+        Refresh() ;
+
+    return retval;
+}
+
 #endif // wxUSE_STATBOX
 
